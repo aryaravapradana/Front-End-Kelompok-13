@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Bangun Datar</title>
+</head>
+<body>
+    <div class="Container">
+
+        <div class="head">
+            <h1>Kalkulator Bangun Datar</h1>
+        </div>
+
+        <div class="opsi"> 
+            <p>Hitung Luas dan Keliling bangun datar dari: </p>
+            <form>
+                <select name="bangunDatar">
+                    <option value="persegi">persegi</option>
+                    <option value="persegi panjang">persegi panjang</option>
+                    <option value="segitiga">segitiga</option>
+                    <option value="lingkaran">lingkaran</option>
+                    <option value="Trapesium">Trapesium</option>
+                    <option value="jajar genjang">jajar genjang</option>
+                    <option value="belah ketupat">belah ketupat</option>
+                    <option value="layang">Layang-layang</option>
+                </select>
+                <input type="submit" value="Pilih">
+            </form>
+        </div>
+
+        <div class="kalkulator">
+
+            <div class="persegi">
+                <h2>Persegi</h2>
+                <form id="persegi">
+
+                    <label for="sisi">Sisi:</label>
+                    <input type="number" name="sisi" required="required" id="sisi"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <div class="persegipanjang">
+                <h2>Persegi Panjang</h2>
+                <form id="persegipanjang">
+
+                    <label for="panjang">Panjang:</label>
+                    <input type="number" id="panjang" name="panjang" required="required"/><br><br>
+
+                    <label for="lebar">Lebar:</label>
+                    <input type="number" id="lebar" name="lebar" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <div class="segitiga">
+                <h2>Segitiga</h2>
+                <form id="segitiga">
+
+                    <h4>Hitung Luas:</h4>
+
+                    <label for="alas">Alas:</label>
+                    <input type="number" id="alas" name="alas" required="required"/><br><br>
+
+                    <label for="tinggi">Tinggi:</label>
+                    <input type="number" id="tinggi" name="tinggi" required="required"/>
+
+                    <h4>Hitung Keliling:</h4>
+
+                    <label for="sisi1">sisi pertama:</label>
+                    <input type="number" id="sisi1" name="sisi1" required="required"/><br><br>
+
+                    <label for="sisi2">sisi kedua:</label>
+                    <input type="number" id="sisi2" name="sisi2" required="required"/><br><br>
+
+                    <label for="sisi3">sisi ketiga:</label>
+                    <input type="number" id="sisi3" name="sisi3" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <div class="lingkaran">
+                <h2>Lingkaran</h2>
+                <form id="lingkaran">
+
+                    <label for="jari">Jari-jari:</label>
+                    <input type="number" id="jari" name="jari" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <!-- Trapesium -->
+            <div class="trapesium">
+            <h2>Trapesium</h2>
+                <form id="trapesium">
+
+                    <label for="atas">Sisi atas:</label>
+                    <input type="number" id="atas" name="atas" required="required"/><br><br>
+
+                    <label for="bawah">Sisi Bawah:</label>
+                    <input type="number" id="bawah" name="bawah" required="required"/><br><br>
+
+                    <label for="miring">Sisi miring:</label>
+                    <input type="number" id="miring" name="miring" required="required"/><br><br>
+
+                    <label for="tinggiTr">Tinggi:</label>
+                    <input type="number" id="tinggiTr" name="tinggiTr" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <div class="jajarGenjang">
+                <h2>Jajar Genjang</h2>
+                <form id="jajarGenjang">
+
+                    <label for="alasJG">Alas:</label>
+                    <input type="number" id="alasJG" name="alasJG" required="required"/><br><br>
+
+                    <label for="tinggiJG">Tinggi:</label>
+                    <input type="number" id="tinggiJG" name="tinggiJG" required="required"/><br><br>
+
+                    <label for="miringJD">Sisi miring:</label>
+                    <input type="number" id="miringJD" name="miringJD" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <div class="belahKetupat">
+            <h2>Belah Ketupat</h2>
+                <form id="belahKetupat">
+
+                    <label for="d1">Diagonal 1:</label>
+                    <input type="number" id="d1" name="d1" required="required"/><br><br>
+
+                    <label for="d2">Diagonal 2:</label>
+                    <input type="number" id="d2" name="d2" required="required"/><br><br>
+
+                    <label for="sisiBK">Sisi:</label>
+                    <input type="number" id="sisiBK" name="sisiBK" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+
+                </form>
+            </div>
+
+            <div class="layang">
+            <h2>Layang-Layang</h2>
+            <form id="layang">
+                    <label for="d1L">Diagonal 1:</label>
+                    <input type="number" id="d1L" name="d1L" required="required"/><br><br>
+
+                    <label for="d2L">Diagonal 2:</label>
+                    <input type="number" id="d2L" name="d2L" required="required"/><br><br>
+
+                    <label for="sisiL1">Sisi 1:</label>
+                    <input type="number" id="sisiL1" name="sisiL1" required="required"/><br><br>
+
+                    <label for="sisiL2">Sisi 2:</label>
+                    <input type="number" id="sisiL2" name="sisiL2" required="required"/><br><br>
+
+                    <input type="submit" value="Hitung">
+                </form>
+            </div>
+        </div>
+
+        <div class="output">
+            <h2>Hasil Kalkulasi:</h2>  
+
+        </div>
+    </div>
+</body>
+</html>
