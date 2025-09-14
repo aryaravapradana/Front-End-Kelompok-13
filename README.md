@@ -1,6 +1,6 @@
 # KELOMPOK 13
-Davin Pratama (53524007) 
-Arya Rava Pradana (535240021) 
+- Davin Pratama (53524007)
+- Arya Rava Pradana (535240021) 
 
 
 # Kalkulator Bangun Datar Interaktif
