@@ -1,3 +1,8 @@
+# KELOMPOK 13
+Davin Pratama (53524007) 
+Arya Rava Pradana (535240021) 
+
+
 # Kalkulator Bangun Datar Interaktif
 
 Sebuah aplikasi web sederhana dan modern untuk menghitung luas serta keliling berbagai bangun datar, dilengkapi dengan fitur konversi satuan yang cerdas dan fleksibel. Proyek ini dibangun sebagai bagian dari eksplorasi STEM yang menggabungkan konsep geometri dengan implementasi praktis menggunakan teknologi web.
