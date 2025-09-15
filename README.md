@@ -19,7 +19,7 @@ Sebuah aplikasi web sederhana dan modern untuk menghitung luas serta keliling be
 
 ---
 
-## 🛠Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 - **HTML5:** Untuk struktur konten yang semantik dan aksesibel.
 - **CSS3:** Untuk styling, layout modern (Flexbox & Grid), dan animasi halus.
