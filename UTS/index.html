@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budaya Papua</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">Tanah Papua</h1>
+
+            <i class='bx bx-menu' id="menu-icon"></i>
+
+            <div class="link-nav">
+                <a href="#beranda">Home</a>
+                <a href="#content">Content</a>
+                <a href="#markup">Marked</a>
+                <a href="#comment">Comment</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="beranda" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-bg"></div>
+            <div class="hero-bg"></div>
+            <div class="hero-bg"></div>
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h2>Temukan Keajaiban di <span>Timur Indonesia</span> </h2>
+                <p>Jelajahi kekayaan <span id="animasi-tulisan"></span> <span>Papua.</span></p>
+            </div>
+        </section>
+
+        <section id="jelajah" class="controls-container">
+
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Cari kuliner, adat, atau wisata...">
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn" data-category="semua">Semua</button>
+                <button class="filter-btn" data-category="kuliner">Kuliner</button>
+                <button class="filter-btn" data-category="adat">Adat</button>
+                <button class="filter-btn" data-category="wisata">Wisata</button>
+            </div>
+        </section>
+
+        <section class="content" id="content">
+            <div id="content-container" class="card-container">
+            </div>
+        </section>
+
+        <section class="markup" id="markup">
+            <h2 class="category-title">Konten yang Ditandai</h2>
+            <div id="mark-container" class="card-container"></div>
+            <p id="before-message" class="before-message">
+                Tandai Konten yang ingin kamu baca nanti disini. cukup dengan menekan tombol <span
+                    class="gimick-btn">Tandai</span><br>
+                Jika kamu sudah selesai membaca, kamu bisa menekan tombol <span class="gimick-btn">Hapus</span> di sini
+                <br>
+                atau <span class="gimick-btn">Hapus Tanda</span> pada konten utama untuk menghilangkan item dari markup
+            </p>
+        </section>
+
+        <section id="comment">
+            <h2 class="category-title">Komentar</h2>
+            <div class="comment-form">
+                <h3>Apa yang Anda Pikirkan?</h3>
+                <input type="text" id="name-input" placeholder="Nama kamu..." />
+                <textarea id="comment-input" placeholder="Tulis komentar kamu..." rows="4"></textarea>
+                <button id="submit-comment">Kirim</button>
+            </div>
+            <div class="comment-list" id="comment-list">
+                <p class="before-comment">Belum ada komentar nih... Yuk, jadi yang pertama!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p> &copy; KELOMPOK 13 <span>(DAVIN PRATAMA & ARYA RAVA PRADANA)</span></p>
+        <h3><span>Tanah Papua</span></h3>
+        <p><q><span>Tanah Papua</span>, Surga Kecil yang Jatuh ke Bumi.</q></p>
+    </footer>
+
+    <div id="popupForm" class="popup hidden">
+        <div class="popup-content">
+            <h3 id="form-title">Tambah Konten</h3>
+            <form id="contentForm">
+                <input type="text" id="new-title" placeholder="Judul konten" required="required" />
+                <textarea id="new-desc" placeholder="Deskripsi konten" required="required"></textarea>
+                <input type="file" id="new-img" accept="image/*" required="required" />
+                <button type="submit">Simpan</button>
+                <button type="button" id="closePopup">Batal</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
