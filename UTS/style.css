@@ -179,11 +179,11 @@ textarea {
 .hero-content {
     padding: 3rem 2.5rem;
     max-width: 850px;
-    animation: tulisanBukaWeb 2s ease forwards;
 }
 
 .hero-content h2 {
     font-size: 3.8rem;
+    line-height: 1.2;
     margin-bottom: 1.5rem;
     color: var(--Putih-cerah);
     text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7);
@@ -195,24 +195,23 @@ textarea {
 
 .hero-content p {
     font-size: 1.4rem;
-    opacity: 0.9;
     color: #f1f1f1;
+    opacity: 0;
+    animation: fadeInEffect 1s ease forwards;
 }
 
-@keyframes tulisanBukaWeb {
+@keyframes fadeInEffect {
     from {
-        transform: translateY(40px);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
         opacity: 1;
     }
 }
 
 #animasi-tulisan::after {
     content: "Kuliner";
-    animation: gantiTeks 3s infinite;
+    animation: gantiTeks 6s infinite;
     color: var(--Oren);
 }
 
@@ -598,12 +597,123 @@ footer span{
     background: #2a1f1f;
     padding: 2.5rem;
     border-radius: 18px;
-    width: 450px;
     max-width: 90%;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     transform: scale(0.95);
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0;
+}
+
+#popupForm .popup-content {
+    max-width: 1100px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+#contentForm {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.form-image-upload-area {
+    flex: 0 0 40%;
+    border: 3px dashed var(--Coklat-tua);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--Coklat);
+    transition: border-color 0.3s ease;
+}
+
+.form-image-upload-area:hover {
+    border-color: var(--Oren);
+}
+
+.form-image-upload-area label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.form-image-upload-area input[type="file"] {
+    display: none;
+}
+
+#upload-prompt {
+    text-align: center;
+    color: var(--Putih-cerah);
+    transition: opacity 0.3s ease;
+}
+
+#upload-prompt i {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+#image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#image-preview.hidden {
+    display: none;
+}
+
+#image-preview:not(.hidden) + #upload-prompt {
+    opacity: 0;
+}
+
+.form-text-fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-text-fields textarea {
+    flex-grow: 1;
+    resize: none;
+}
+
+.form-full-width {
+    flex-basis: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.form-full-width button {
+    width: auto;
+    padding: 1rem 4rem;
+    font-size: 1.2rem;
+}
+
+#popupForm .close-btn {
+    align-self: flex-end;
+    margin-bottom: -1rem;
+    transform: translate(50%, -50%);
 }
 
 .popup:not(.hidden) .popup-content {
@@ -1066,5 +1176,27 @@ footer span{
     .popup-content {
         width: 95%;
         padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #popupForm .popup-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    #contentForm {
+        flex-direction: column;
+    }
+
+    .form-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-image-upload-area {
+        align-self: center;
+        width: 80%;
+        height: 200px;
+        margin-bottom: 1rem;
     }
 }

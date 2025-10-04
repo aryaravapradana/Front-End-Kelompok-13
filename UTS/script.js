@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  //======================================================================
-  // GLOBAL STATE
-  //======================================================================
+  
+  
+  
 
   const marked = new Set();
   let activeFilter = "semua";
   let searchWord = "";
   let currentCategory = null;
 
-  //======================================================================
-  // DATA
-  //======================================================================
+  
+  
+  
 
   const content = {
     kuliner: [
@@ -322,9 +322,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   };
 
-  //======================================================================
-  // DOM ELEMENTS
-  //======================================================================
+  
+  
+  
 
   const container = document.getElementById('content-container');
   const markContainer = document.getElementById('mark-container');
@@ -338,10 +338,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const detailPopupTitle = document.getElementById('detail-popup-title');
   const detailPopupDesc = document.getElementById('detail-popup-desc');
   const closeDetailPopupBtn = document.getElementById('close-detail-popup');
+  const imagePreview = document.getElementById('image-preview');
 
-  //======================================================================
-  // RENDER FUNCTIONS
-  //======================================================================
+  
+  
+  
 
   /**
    * Renders all content based on the global `content` object.
@@ -381,6 +382,37 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /**
+   * Adds a new card to the DOM without re-rendering everything.
+   * @param {object} item - The new item to add.
+   * @param {string} category - The category of the new item.
+   */
+  function addNewCard(item, category) {
+    const categoryGroup = document.querySelector(`.category-group[data-category='${category}']`);
+    if (!categoryGroup) return;
+
+    const cardContainer = categoryGroup.querySelector('.card-container');
+    const addButton = categoryGroup.querySelector('.add-content-btn');
+
+    const isMarked = marked.has(item.title);
+    const newCard = document.createElement('div');
+    newCard.classList.add('card');
+    newCard.innerHTML = `
+      ${item.img ? `<img src="${item.img}" alt="${item.title}">` : ''}
+      <h3>${item.title}</h3>
+      <p>${item.short_desc}</p>
+      <button class="mark-btn${isMarked ? ' marked' : ''}">
+        ${isMarked ? 'Hapus Tanda' : 'Tandai'}
+      </button>
+    `;
+
+    if (addButton) {
+      cardContainer.insertBefore(newCard, addButton);
+    } else {
+      cardContainer.appendChild(newCard);
+    }
+  }
+
+  /**
    * Filters and searches content based on `activeFilter` and `searchWord`.
    * Toggles the visibility of cards and groups.
    */
@@ -402,10 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
-
-  //======================================================================
-  // MARKUP (TANDAI) FUNCTIONS
-  //======================================================================
+  
 
   /**
    * Toggles the visibility of the placeholder message in the markup section.
@@ -447,9 +476,9 @@ document.addEventListener('DOMContentLoaded', function () {
     updatebeforeMessage();
   }
 
-  //======================================================================
-  // COMMENT FUNCTIONS
-  //======================================================================
+  
+  
+  
 
   /**
    * Toggles the visibility of the placeholder message in the comment section.
@@ -486,10 +515,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  //======================================================================
-  // POPUP FUNCTIONS
-  //======================================================================
-
   function openDetailPopup(item) {
     detailPopupTitle.textContent = item.title;
     detailPopupDesc.textContent = item.long_desc;
@@ -506,9 +531,9 @@ document.addEventListener('DOMContentLoaded', function () {
     detailPopup.classList.add('hidden');
   }
 
-  //======================================================================
-  // EVENT HANDLERS
-  //======================================================================
+  
+  
+  
 
   /**
    * Handles clicks on the main content container using event delegation.
@@ -517,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function handleContentClick(e) {
     const target = e.target;
 
-    // Handle "Tandai" button clicks
+    
     if (target.classList.contains('mark-btn')) {
       const parentCard = target.closest('.card');
       const title = parentCard.querySelector('h3').textContent;
@@ -538,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // Handle "Tambah Konten" button clicks
+    
     if (target.classList.contains('add-content-btn')) {
       currentCategory = target.dataset.category;
       document.getElementById("form-title").textContent = `Tambah ${currentCategory}`;
@@ -546,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // Handle card clicks
+    
     const card = target.closest('.card');
     if (card) {
         const title = card.querySelector('h3').textContent;
@@ -565,34 +590,47 @@ document.addEventListener('DOMContentLoaded', function () {
   function handleFormSubmit(e) {
     e.preventDefault();
     const title = document.getElementById("new-title").value;
-    const desc = document.getElementById("new-desc").value;
+    const short_desc = document.getElementById("new-short-desc").value;
+    const long_desc = document.getElementById("new-long-desc").value;
+    const location = document.getElementById("new-location").value;
+    const era = document.getElementById("new-era").value;
+    const uniqueness = document.getElementById("new-uniqueness").value;
+    const status = document.getElementById("new-status").value;
     const file = document.getElementById("new-img").files[0];
 
-    const processNewContent = (imgSrc) => {
-      content[currentCategory].push({ title, short_desc: desc, img: imgSrc, long_desc: "", location: "", era: "", uniqueness: "", status: "" });
-      renderContent();
-      popup.classList.add("hidden");
-      form.reset();
+    let imgSrc = null;
+    if (file) {
+      imgSrc = URL.createObjectURL(file);
+    }
+
+    const newItem = {
+      title,
+      short_desc,
+      long_desc,
+      location,
+      era,
+      uniqueness,
+      status,
+      img: imgSrc
     };
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => processNewContent(event.target.result);
-      reader.readAsDataURL(file);
-    } else {
-      processNewContent(null);
-    }
+    content[currentCategory].push(newItem);
+    addNewCard(newItem, currentCategory);
+    popup.classList.add("hidden");
+    form.reset();
+    imagePreview.classList.add('hidden');
+    imagePreview.src = '#';
   }
 
-  //======================================================================
-  // INITIALIZATION
-  //======================================================================
+  
+  
+  
 
   /**
    * Sets up all initial event listeners.
    */
   function init() {
-    // Navbar scroll behavior
+    
     const sections = document.querySelectorAll("main section[id]");
     const navLinks = document.querySelectorAll(".link-nav a");
     window.addEventListener("scroll", () => {
@@ -608,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    // Mobile menu toggle
+    
     const menuIcon = document.getElementById('menu-icon');
     const navbar = document.querySelector('.navbar');
     menuIcon.addEventListener('click', () => {
@@ -616,7 +654,7 @@ document.addEventListener('DOMContentLoaded', function () {
       navbar.classList.toggle('active');
     });
 
-    // Filter buttons
+    
     document.querySelector('.filter-buttons').addEventListener('click', (e) => {
       if (e.target.classList.contains('filter-btn')) {
         activeFilter = e.target.dataset.category;
@@ -624,40 +662,59 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Search bar
+    
     document.getElementById('search-input').addEventListener('input', (e) => {
       searchWord = e.target.value.toLowerCase();
       filterAndSearch();
     });
 
-    // Main content container (for marking and adding content)
+    
     container.addEventListener('click', handleContentClick);
 
-    // Markup container (for removing marks)
+    
     markContainer.addEventListener('click', (e) => {
-      if (e.target.classList.contains('remove-mark-btn')) {
-        const parentCard = e.target.closest('.card');
-        const title = parentCard.querySelector('h3').textContent;
+      const target = e.target;
+      const card = target.closest('.card');
+
+      if (target.classList.contains('remove-mark-btn')) {
+        const title = card.querySelector('h3').textContent;
         
-        // Unmark in main content
         document.querySelectorAll('.mark-btn.marked').forEach(btn => {
-          const card = btn.closest('.card');
-          if (card && card.querySelector('h3').textContent === title) {
+          const mainCard = btn.closest('.card');
+          if (mainCard && mainCard.querySelector('h3').textContent === title) {
             btn.classList.remove('marked');
             btn.textContent = 'Tandai';
           }
         });
         
         marked.delete(title);
-        parentCard.remove();
+        card.remove();
         updatebeforeMessage();
+        return; 
+      }
+
+      if (card) {
+        const title = card.querySelector('h3').textContent;
+        
+        let item = null;
+        for (const category in content) {
+            const foundItem = content[category].find(i => i.title === title);
+            if (foundItem) {
+                item = foundItem;
+                break;
+            }
+        }
+
+        if (item) {
+            openDetailPopup(item);
+        }
       }
     });
 
-    // Comment submission
+    
     document.getElementById('submit-comment').addEventListener('click', addComment);
 
-    // Comment list (for deleting comments)
+    
     commentList.addEventListener('click', (e) => {
       if (e.target.classList.contains('delete-btn')) {
         e.target.closest('.comment-item').remove();
@@ -665,11 +722,23 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Popup form
-    form.addEventListener("submit", handleFormSubmit);
-    document.getElementById("closePopup").addEventListener("click", () => popup.classList.add("hidden"));
+    
+    const newImgInput = document.getElementById('new-img');
+    newImgInput.addEventListener('change', () => {
+        const file = newImgInput.files[0];
+        if (file) {
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.classList.remove('hidden');
+        }
+    });
 
-    // Detail popup
+    form.addEventListener("submit", handleFormSubmit);
+    document.getElementById("closePopup").addEventListener("click", () => {
+        popup.classList.add("hidden");
+        imagePreview.classList.add('hidden'); 
+    });
+
+    
     closeDetailPopupBtn.addEventListener('click', closeDetailPopup);
     detailPopup.addEventListener('click', (e) => {
         if (e.target === detailPopup) {
@@ -677,13 +746,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Initial render and UI updates
+    
     renderContent();
     updatebeforeMessage();
     updatebeforeComment();
   }
 
-  // Start the application
+  
   init();
 
 });
