@@ -94,13 +94,35 @@
 
     <div id="popupForm" class="popup hidden">
         <div class="popup-content">
+            <button type="button" id="closePopup" class="close-btn">&times;</button>
             <h3 id="form-title">Tambah Konten</h3>
             <form id="contentForm">
-                <input type="text" id="new-title" placeholder="Judul konten" required />
-                <textarea id="new-desc" placeholder="Deskripsi konten" required></textarea>
-                <input type="file" id="new-img" accept="image/*" required />
-                <button type="submit">Simpan</button>
-                <button type="button" id="closePopup">Batal</button>
+                <div class="form-image-upload-area">
+                    <label for="new-img">
+                        <img id="image-preview" src="#" alt="Image Preview" class="hidden" />
+                        <div id="upload-prompt">
+                            <i class='bx bx-upload'></i>
+                            <span>Pilih atau jatuhkan gambar di sini</span>
+                        </div>
+                    </label>
+                    <input type="file" id="new-img" accept="image/*" required />
+                </div>
+
+                <div class="form-text-fields">
+                    <input type="text" id="new-title" placeholder="Judul" required />
+                    <textarea id="new-short-desc" placeholder="Deskripsi Pendek" rows="3" required></textarea>
+                    <div class="form-details-grid">
+                        <input type="text" id="new-location" placeholder="Lokasi" required />
+                        <input type="text" id="new-era" placeholder="Era" required />
+                        <input type="text" id="new-uniqueness" placeholder="Keunikan" required />
+                        <input type="text" id="new-status" placeholder="Status" required />
+                    </div>
+                    <textarea id="new-long-desc" placeholder="Deskripsi Panjang" rows="5" required></textarea>
+                </div>
+
+                <div class="form-full-width">
+                    <button type="submit">Simpan Konten</button>
+                </div>
             </form>
         </div>
     </div>

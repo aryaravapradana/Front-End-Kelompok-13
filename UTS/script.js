@@ -338,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const detailPopupTitle = document.getElementById('detail-popup-title');
   const detailPopupDesc = document.getElementById('detail-popup-desc');
   const closeDetailPopupBtn = document.getElementById('close-detail-popup');
+  const imagePreview = document.getElementById('image-preview');
 
   //======================================================================
   // RENDER FUNCTIONS
@@ -565,14 +566,30 @@ document.addEventListener('DOMContentLoaded', function () {
   function handleFormSubmit(e) {
     e.preventDefault();
     const title = document.getElementById("new-title").value;
-    const desc = document.getElementById("new-desc").value;
+    const short_desc = document.getElementById("new-short-desc").value;
+    const long_desc = document.getElementById("new-long-desc").value;
+    const location = document.getElementById("new-location").value;
+    const era = document.getElementById("new-era").value;
+    const uniqueness = document.getElementById("new-uniqueness").value;
+    const status = document.getElementById("new-status").value;
     const file = document.getElementById("new-img").files[0];
 
     const processNewContent = (imgSrc) => {
-      content[currentCategory].push({ title, short_desc: desc, img: imgSrc, long_desc: "", location: "", era: "", uniqueness: "", status: "" });
+      const newItem = { 
+        title, 
+        short_desc, 
+        long_desc, 
+        location, 
+        era, 
+        uniqueness, 
+        status, 
+        img: imgSrc 
+      };
+      content[currentCategory].push(newItem);
       renderContent();
       popup.classList.add("hidden");
       form.reset();
+      imagePreview.classList.add('hidden'); // Hide preview on submit
     };
 
     if (file) {
@@ -666,8 +683,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Popup form
+    const newImgInput = document.getElementById('new-img');
+    newImgInput.addEventListener('change', () => {
+        const file = newImgInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
     form.addEventListener("submit", handleFormSubmit);
-    document.getElementById("closePopup").addEventListener("click", () => popup.classList.add("hidden"));
+    document.getElementById("closePopup").addEventListener("click", () => {
+        popup.classList.add("hidden");
+        imagePreview.classList.add('hidden'); // Hide preview on close
+    });
 
     // Detail popup
     closeDetailPopupBtn.addEventListener('click', closeDetailPopup);
