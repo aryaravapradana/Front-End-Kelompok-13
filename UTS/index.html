@@ -96,12 +96,31 @@
         <div class="popup-content">
             <h3 id="form-title">Tambah Konten</h3>
             <form id="contentForm">
-                <input type="text" id="new-title" placeholder="Judul konten" required="required" />
-                <textarea id="new-desc" placeholder="Deskripsi konten" required="required"></textarea>
-                <input type="file" id="new-img" accept="image/*" required="required" />
+                <input type="text" id="new-title" placeholder="Judul konten" required />
+                <textarea id="new-desc" placeholder="Deskripsi konten" required></textarea>
+                <input type="file" id="new-img" accept="image/*" required />
                 <button type="submit">Simpan</button>
                 <button type="button" id="closePopup">Batal</button>
             </form>
+        </div>
+    </div>
+
+    <div id="detail-popup" class="popup hidden">
+        <div class="popup-content">
+            <button id="close-detail-popup" class="close-btn">&times;</button>
+            <div class="popup-image-container">
+                <img id="detail-popup-img" src="" alt="Detail Gambar">
+            </div>
+            <div class="popup-text-container">
+                <h3 id="detail-popup-title"></h3>
+                <div id="detail-popup-info" class="popup-info">
+                    <p><strong>Lokasi:</strong> <span id="detail-popup-location"></span></p>
+                    <p><strong>Era:</strong> <span id="detail-popup-era"></span></p>
+                    <p><strong>Keunikan:</strong> <span id="detail-popup-uniqueness"></span></p>
+                    <p><strong>Status:</strong> <span id="detail-popup-status"></span></p>
+                </div>
+                <p id="detail-popup-desc"></p>
+            </div>
         </div>
     </div>
 
