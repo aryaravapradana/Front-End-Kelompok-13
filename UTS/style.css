@@ -1179,3 +1179,25 @@ footer span{
         padding: 2rem;
     }
 }
+
+@media (max-width: 768px) {
+    #popupForm .popup-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    #contentForm {
+        flex-direction: column;
+    }
+
+    .form-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-image-upload-area {
+        align-self: center;
+        width: 80%;
+        height: 200px;
+        margin-bottom: 1rem;
+    }
+}
