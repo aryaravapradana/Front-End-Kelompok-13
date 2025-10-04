@@ -179,11 +179,11 @@ textarea {
 .hero-content {
     padding: 3rem 2.5rem;
     max-width: 850px;
-    animation: tulisanBukaWeb 2s ease forwards;
 }
 
 .hero-content h2 {
     font-size: 3.8rem;
+    line-height: 1.2;
     margin-bottom: 1.5rem;
     color: var(--Putih-cerah);
     text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7);
@@ -195,24 +195,23 @@ textarea {
 
 .hero-content p {
     font-size: 1.4rem;
-    opacity: 0.9;
     color: #f1f1f1;
+    opacity: 0;
+    animation: fadeInEffect 1s ease forwards;
 }
 
-@keyframes tulisanBukaWeb {
+@keyframes fadeInEffect {
     from {
-        transform: translateY(40px);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
         opacity: 1;
     }
 }
 
 #animasi-tulisan::after {
     content: "Kuliner";
-    animation: gantiTeks 3s infinite;
+    animation: gantiTeks 6s infinite;
     color: var(--Oren);
 }
 
