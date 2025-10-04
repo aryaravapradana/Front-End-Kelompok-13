@@ -673,22 +673,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     markContainer.addEventListener('click', (e) => {
-      if (e.target.classList.contains('remove-mark-btn')) {
-        const parentCard = e.target.closest('.card');
-        const title = parentCard.querySelector('h3').textContent;
-        
+      const target = e.target;
+      const card = target.closest('.card');
+
+      if (target.classList.contains('remove-mark-btn')) {
+        const title = card.querySelector('h3').textContent;
         
         document.querySelectorAll('.mark-btn.marked').forEach(btn => {
-          const card = btn.closest('.card');
-          if (card && card.querySelector('h3').textContent === title) {
+          const mainCard = btn.closest('.card');
+          if (mainCard && mainCard.querySelector('h3').textContent === title) {
             btn.classList.remove('marked');
             btn.textContent = 'Tandai';
           }
         });
         
         marked.delete(title);
-        parentCard.remove();
+        card.remove();
         updatebeforeMessage();
+        return; 
+      }
+
+      if (card) {
+        const title = card.querySelector('h3').textContent;
+        
+        let item = null;
+        for (const category in content) {
+            const foundItem = content[category].find(i => i.title === title);
+            if (foundItem) {
+                item = foundItem;
+                break;
+            }
+        }
+
+        if (item) {
+            openDetailPopup(item);
+        }
       }
     });
 
