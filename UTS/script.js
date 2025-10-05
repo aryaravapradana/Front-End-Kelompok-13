@@ -339,6 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const detailPopupDesc = document.getElementById('detail-popup-desc');
   const closeDetailPopupBtn = document.getElementById('close-detail-popup');
   const imagePreview = document.getElementById('image-preview');
+  const uploadPrompt = document.getElementById('upload-prompt');
 
   
   
@@ -567,6 +568,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (target.classList.contains('add-content-btn')) {
       currentCategory = target.dataset.category;
       document.getElementById("form-title").textContent = `Tambah ${currentCategory}`;
+      
+      // Reset form state every time it's opened
+      form.reset();
+      document.getElementById("new-img").value = "";
+      imagePreview.classList.add('hidden');
+      imagePreview.src = '#';
+      uploadPrompt.classList.remove('hidden');
+
       popup.classList.remove("hidden");
       return;
     }
@@ -616,11 +625,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     content[currentCategory].push(newItem);
     addNewCard(newItem, currentCategory);
+
     popup.classList.add("hidden");
-    form.reset();
-    imagePreview.classList.add('hidden');
-    imagePreview.src = '#';
-    uploadPrompt.classList.remove('hidden');
   }
 
   
@@ -726,7 +732,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const newImgInput = document.getElementById('new-img');
     const uploadArea = document.querySelector('.form-image-upload-area');
-    const uploadPrompt = document.getElementById('upload-prompt');
 
     newImgInput.addEventListener('change', () => {
         const file = newImgInput.files[0];
@@ -765,9 +770,6 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener("submit", handleFormSubmit);
     document.getElementById("closePopup").addEventListener("click", () => {
         popup.classList.add("hidden");
-        imagePreview.classList.add('hidden'); 
-        uploadPrompt.classList.remove('hidden');
-        form.reset();
     });
 
     
