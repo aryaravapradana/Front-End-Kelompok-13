@@ -620,6 +620,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.reset();
     imagePreview.classList.add('hidden');
     imagePreview.src = '#';
+    uploadPrompt.classList.remove('hidden');
   }
 
   
@@ -724,11 +725,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     const newImgInput = document.getElementById('new-img');
+    const uploadArea = document.querySelector('.form-image-upload-area');
+    const uploadPrompt = document.getElementById('upload-prompt');
+
     newImgInput.addEventListener('change', () => {
         const file = newImgInput.files[0];
         if (file) {
             imagePreview.src = URL.createObjectURL(file);
             imagePreview.classList.remove('hidden');
+            uploadPrompt.classList.add('hidden');
+        }
+    });
+
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type.startsWith('image/')) {
+                newImgInput.files = files;
+                const changeEvent = new Event('change');
+                newImgInput.dispatchEvent(changeEvent);
+            } else {
+                alert('Hanya file gambar yang diperbolehkan!');
+            }
         }
     });
 
@@ -736,6 +766,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("closePopup").addEventListener("click", () => {
         popup.classList.add("hidden");
         imagePreview.classList.add('hidden'); 
+        uploadPrompt.classList.remove('hidden');
+        form.reset();
     });
 
     
