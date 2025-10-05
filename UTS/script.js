@@ -1,17 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-
-  
-  
-  
-
   const marked = new Set();
   let activeFilter = "semua";
   let searchWord = "";
   let currentCategory = null;
-
-  
-  
-  
 
   const content = {
     kuliner: [
@@ -322,10 +313,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   };
 
-  
-  
-  
-
   const container = document.getElementById('content-container');
   const markContainer = document.getElementById('mark-container');
   const beforeMessage = document.getElementById('before-message');
@@ -341,14 +328,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const imagePreview = document.getElementById('image-preview');
   const uploadPrompt = document.getElementById('upload-prompt');
 
-  
-  
-  
-
-  /**
-   * Renders all content based on the global `content` object.
-   * This function rebuilds the main content area's HTML.
-   */
   function renderContent() {
     const scrollY = window.scrollY;
 
@@ -413,10 +392,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /**
-   * Filters and searches content based on `activeFilter` and `searchWord`.
-   * Toggles the visibility of cards and groups.
-   */
   function filterAndSearch() {
     const groups = document.querySelectorAll('.category-group');
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
@@ -435,15 +410,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
-  
 
-  /**
-   * Toggles the visibility of the placeholder message in the markup section.
-   */
   function updatebeforeMessage() {
     beforeMessage.style.display = markContainer.children.length === 0 ? 'block' : 'none';
   }
-
   /**
    * Adds a new card to the markup section.
    * @param {{title: string, desc: string, img: string}} item - The item to add.
@@ -476,10 +446,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     updatebeforeMessage();
   }
-
-  
-  
-  
 
   /**
    * Toggles the visibility of the placeholder message in the comment section.
@@ -532,10 +498,6 @@ document.addEventListener('DOMContentLoaded', function () {
     detailPopup.classList.add('hidden');
   }
 
-  
-  
-  
-
   /**
    * Handles clicks on the main content container using event delegation.
    * @param {Event} e - The click event.
@@ -543,7 +505,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function handleContentClick(e) {
     const target = e.target;
 
-    
     if (target.classList.contains('mark-btn')) {
       const parentCard = target.closest('.card');
       const title = parentCard.querySelector('h3').textContent;
@@ -563,7 +524,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       return;
     }
-
     
     if (target.classList.contains('add-content-btn')) {
       currentCategory = target.dataset.category;
@@ -579,7 +539,6 @@ document.addEventListener('DOMContentLoaded', function () {
       popup.classList.remove("hidden");
       return;
     }
-
     
     const card = target.closest('.card');
     if (card) {
@@ -629,10 +588,6 @@ document.addEventListener('DOMContentLoaded', function () {
     popup.classList.add("hidden");
   }
 
-  
-  
-  
-
   /**
    * Sets up all initial event listeners.
    */
@@ -652,7 +607,6 @@ document.addEventListener('DOMContentLoaded', function () {
         link.classList.toggle("active", link.getAttribute("href") === "#" + current);
       });
     });
-
     
     const menuIcon = document.getElementById('menu-icon');
     const navbar = document.querySelector('.navbar');
@@ -660,7 +614,6 @@ document.addEventListener('DOMContentLoaded', function () {
       menuIcon.classList.toggle('bx-x');
       navbar.classList.toggle('active');
     });
-
     
     document.querySelector('.filter-buttons').addEventListener('click', (e) => {
       if (e.target.classList.contains('filter-btn')) {
@@ -674,11 +627,8 @@ document.addEventListener('DOMContentLoaded', function () {
       searchWord = e.target.value.toLowerCase();
       filterAndSearch();
     });
-
     
     container.addEventListener('click', handleContentClick);
-
-    
     markContainer.addEventListener('click', (e) => {
       const target = e.target;
       const card = target.closest('.card');
@@ -717,18 +667,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
     });
-
     
     document.getElementById('submit-comment').addEventListener('click', addComment);
-
-    
+ 
     commentList.addEventListener('click', (e) => {
       if (e.target.classList.contains('delete-btn')) {
         e.target.closest('.comment-item').remove();
         updatebeforeComment();
       }
     });
-
     
     const newImgInput = document.getElementById('new-img');
     const uploadArea = document.querySelector('.form-image-upload-area');
@@ -771,7 +718,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("closePopup").addEventListener("click", () => {
         popup.classList.add("hidden");
     });
-
     
     closeDetailPopupBtn.addEventListener('click', closeDetailPopup);
     detailPopup.addEventListener('click', (e) => {
@@ -780,13 +726,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    
     renderContent();
     updatebeforeMessage();
     updatebeforeComment();
   }
-
-  
   init();
-
 });
